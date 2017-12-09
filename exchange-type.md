@@ -1,26 +1,27 @@
 
 
-# Exchange 类型
 
-RabbitMQ中，所有生产者提交的消息都由Exchange来接受，然后Exchange按照特定的策略转发到Queue；
+RabbitMQ中，所有生产者提交的消息都由Exchange来接受，然后Exchange按照特定的策略转发到Queue
+
 RabbitMQ提供了四种Exchange：`direct`、`fanout`、`topic`、`headers`
 
 
 
-
-
-## direct
+# direct
 
 - 任何发送到`Direct Exchange`的消息都会被转发到`RouteKey`中指定的`Queue`，可简单的认为`RouteKey`就是队列名
-    - RabbitMQ自带一个`(AMQP default)`Exchange，名字是`""`空字符串，成为 `default Exchange`
-- 这种模式下不需要将Exchange进行任何绑定(binding)操作
-- 如果vhost中**不存指定的队列名**，则该**消息会被抛弃**
+- RabbitMQ自带一个`(AMQP default)`Exchange，名字是`""`空字符串，称为 `default Exchange`
+- 不需要将 Queue 与 Exchange 进行绑定(binding)操作
+- 如果vhost中**不存指定的Queue**，则该**消息会被抛弃**
 
 
-ＴＯＤＯ　direct&default 对比 ：https://stackoverflow.com/questions/14480052/rabbitmq-exchanges-default-vs-direct
+ＴＯＤＯ　direct&default 对比 ：
+
+> [RabbitMQ exchanges: default vs. direct](https://stackoverflow.com/questions/14480052/rabbitmq-exchanges-default-vs-direct)
 
 
-## fanout
+
+# fanout
 
 - 任何发送到`Fanout Exchange`的消息都会被转发到与该Exchange绑定(Binding)的`所有Queue`上
 - 这种模式**不需要RouteKey**
@@ -31,7 +32,7 @@ RabbitMQ提供了四种Exchange：`direct`、`fanout`、`topic`、`headers`
 
 
 
-## topic
+# topic
 
 - 任何发送到`Topic Exchange`的消息都会被转发到所有**关心RouteKey中指定话题的Queue上**
 - 简单来说，就是每个队列都有其关心的主题，所有的**消息都带有一个“标题”(RouteKey)**，Exchange会将消息转发到所有关注主题能与RouteKey模糊匹配的队列
@@ -45,7 +46,7 @@ RabbitMQ提供了四种Exchange：`direct`、`fanout`、`topic`、`headers`
 
 
 
-## headers
+# headers
 
 - 发送者在发送的时候定义一些键值对，接收者在绑定时候传入一些键值对，两者匹配的话，则对应的队列就可以收到消息
 - 匹配有两种方式`all`和`any`，这两种方式是在接收端必须要用键值`x-mactch`来定义

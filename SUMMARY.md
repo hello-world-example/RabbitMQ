@@ -2,4 +2,5 @@
     * [docker](install/docker.md)
     * [Linux](install/linux.md)
     * [mac](install/mac.md)
-* [Exchange类型](exchange-type.md)
+* [AMQP 0.9.1 模型](amqp.md)
+* [Exchange 类型](exchange-type.md)
