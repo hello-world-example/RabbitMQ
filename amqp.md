@@ -2,7 +2,7 @@
 
 [TOC]
 
-
+--------------
 
 > 原文 [AMQP 0-9-1 简介](http://rabbitmq.mr-ping.com/AMQP/AMQP_0-9-1_Model_Explained.html)
 > 
@@ -334,7 +334,7 @@ AMQP中的队列（queue）跟其他消息队列或任务队列中的队列是�
 
 注意，RabbitMQ只支持通道级的预取计数，而不是连接级的或者基于大小的预取。
 
-# Message Attributes and Payload
+## Message Attributes and Payload
 
 > Messages in the AMQP model have attributes. Some attributes are so common that the AMQP 0-9-1 specification defines them and application developers do not have to think about the exact attribute name. Some examples are:
 > - Content type
@@ -368,7 +368,7 @@ AMQP的消息除属性外，也含有一个有效载荷 - Payload（消息实际
 
 消息能够以持久化的方式发布，AMQP代理会将此消息存储在磁盘上。如果服务器重启，系统会确认收到的持久化消息未丢失。简单地将消息发送给一个持久化的交换机或者路由给一个持久化的队列，并不会使得此消息具有持久化性质：它完全取决与消息本身的持久模式（persistence mode）。将消息以持久化方式发布时，会对性能造成一定的影响（就像数据库操作一样，健壮性的存在必定造成一些性能牺牲）。
 
-# Message Acknowledgements
+## Message Acknowledgements
 
 > Since networks are unreliable and applications fail, it is often necessary to have some kind of processing acknowledgement. Sometimes it is only necessary to acknowledge the fact that a message has been received. Sometimes acknowledgements mean that a message was validated and processed by a consumer, for example, verified as having mandatory data and persisted to a data store or indexed.
 
