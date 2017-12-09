@@ -1,3 +1,5 @@
 * [安装](install.md)
     * [docker](install/docker.md)
+    * [Linux](install/linux.md)
     * [mac](install/mac.md)
+* [Exchange类型](exchange-type.md)
