@@ -51,20 +51,43 @@ RabbitMQ和邮局的主要区别在于，RabbitMQ不处理纸张，而是接收�
 > RabbitMQ使用的是AMQP 0.9.1协议。这是一个用于消息传递的开放、通用的协议。针对[不同编程语言](https://www.rabbitmq.com/devtools.html)有大量的RabbitMQ客户端可用。这里我们使用Java 客户端
 >  下载这个[客户端库](http://central.maven.org/maven2/com/rabbitmq/amqp-client/4.0.2/amqp-client-4.0.2.jar)，并且把它的依赖（[SLF4J API](http://central.maven.org/maven2/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar) 和 [SLF4J Simple](http://central.maven.org/maven2/org/slf4j/slf4j-simple/1.7.22/slf4j-simple-1.7.22.jar)）拷贝到类路径下
 >  虽然 SLF4J Simple 已经足够该教程使用了，但是还是建议你 使用 [Logback](https://logback.qos.ch/) 这样成熟的库
->  RabbitMQ Java 客户端已经在Maven仓库了，groupId是`com.rabbitmq`，artifactId是`amqp-client`
+>  (RabbitMQ Java 客户端已经在Maven仓库了，groupId是`com.rabbitmq`，artifactId是`amqp-client`)
 
-###发送
+# 发送
 
 ![](http://www.rabbitmq.com/img/tutorials/sending.png)
 
-我们第一个程序`send.py`会发送一个消息到队列中。首先要做的事情就是建立一个到RabbitMQ服务器的连接。
+> We'll call our message publisher (sender) Send and our message consumer (receiver) Recv. The publisher will connect to RabbitMQ, send a single message, then exit.
 
-```python
-#!/usr/bin/env python
-import pika
+我们将调用我们的消息发布者(发送方)发送和我们的消息消费者(接收者)Recv。发布者将连接到RabbitMQ，发送一条消息，然后退出。
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-channel = connection.channel()
+> In [Send.java](http://github.com/rabbitmq/rabbitmq-tutorials/blob/master/java/Send.java), we need some classes imported:
+
+``` java
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.Channel;
+```
+> Set up the class and name the queue:
+
+``` java
+public class Send {
+
+  private final static String QUEUE_NAME = "hello";
+
+  public static void main(String[] argv) throws java.io.IOException {
+      ...
+  }
+}    
+```
+
+then we can create a connection to the server:
+
+``` java
+ConnectionFactory factory = new ConnectionFactory();
+factory.setHost("localhost");
+Connection connection = factory.newConnection();
+Channel channel = connection.createChannel();
 ```
 
 现在我们已经跟本地机器的代理建立了连接。如果你想连接到其他机器的代理上，需要把代表本地的`localhost`改为指定的名字或IP地址。
@@ -218,6 +241,3 @@ python send.py
 试下在新的终端中再次运行`send.py`。
 
 我们已经学会如何发送消息到一个已知队列中并接收消息。是时候移步到第二部分了，我们将会建立一个简单的工作队列（work queue）。
-
->原文：[Hello World](http://www.rabbitmq.com/tutorials/tutorial-one-python.html)  
->Updated at 2017-06-16
