@@ -1,3 +1,9 @@
+
+
+[TOC]
+
+
+
 > 原文 [AMQP 0-9-1 简介](http://rabbitmq.mr-ping.com/AMQP/AMQP_0-9-1_Model_Explained.html)
 > 
 
