@@ -48,8 +48,16 @@ public class Send {
     // 参数5：arguments 队列扩展参数
     channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     
+    exchange the exchange to publish the message to
+     * @param  the routing key
+     * @param props other properties for the message - routing headers etc
+     * @param body the message body
+    
     // 5. 发送消息
     String message = "Hello World!";
+    // 参数1：exchange 这里的空字符串代表 default Exchange
+    // 参数2：routingKey，default Exchange下routingKey会被路由到同名的队列下
+   	// 参数3：消息属性
     channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
     System.out.println(" [x] Sent '" + message + "'");
     
