@@ -41,7 +41,11 @@ public class Send {
     // 3. 创建信道
     Channel channel = connection.createChannel();
 
-    // 4. 声明一个队列
+    // 4. 声明一个队列（如果队列已经存在，这里也可以不声明）
+    // 参数2：durable 是否是持久化队列
+    // 参数3：exclusive 是否是独占的，只被一个连接（connection）使用，而且当连接关闭后队列即被删除
+    // 参数4：autoDelete 是否自动删除，当最后一个消费者退订后即被删除
+    // 参数5：arguments 队列扩展参数
     channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     
     // 5. 发送消息
@@ -85,8 +89,8 @@ public class Recv {
 
     // 4. 声明一个队列（如果队列已经存在，这里也可以不声明）
     // 参数2：durable 是否是持久化队列
-    // 参数3：exclusive
-    // 参数4：autoDelete 
+    // 参数3：exclusive 是否是独占的，只被一个连接（connection）使用，而且当连接关闭后队列即被删除
+    // 参数4：autoDelete 是否自动删除，当最后一个消费者退订后即被删除
     // 参数5：arguments 队列扩展参数
     channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     
