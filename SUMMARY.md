@@ -5,3 +5,5 @@
 * [AMQP 0.9.1 模型](amqp.md)
 * [Client 教程](tutorials.md)
     * [Hello World](tutorials/hello-world.md)
+    * [Work Queues](tutorials/work-queues.md)
+* [RabbitMQ 对 AMQP 的扩展](ext.md)
