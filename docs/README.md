@@ -1,4 +1,4 @@
-# Template
+# RabbitMQ
 
 - 官网
 - 中文社区
